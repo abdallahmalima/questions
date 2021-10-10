@@ -25,4 +25,6 @@ Route::group(['middleware'=>'auth:sanctum','prefix'=>'v1'],function(){
     Route::get('/user', function (Request $request) {
         return response(['user'=>$request->user()],200);
     });
+
+    Route::apiResource('questions',App\Http\Controllers\QuestionController::class);
 });

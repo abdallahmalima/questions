@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Question;
+use App\Models\Reply;
+use App\Models\Comment;
+
 
 class User extends Authenticatable
 {
@@ -41,4 +45,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function questions(){
+
+        return $this->hasMany(Question::class);
+    }
+
+    public function replies(){
+
+        return $this->hasMany(Reply::class);
+    }
+
+    public function comments(){
+
+        return $this->hasMany(Comment::class);
+    }
 }
