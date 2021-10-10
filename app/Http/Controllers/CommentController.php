@@ -53,7 +53,7 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         //
-        $comment->update($request->all());
+        $comment->update($request->except('user_id'));
         return new CommentResource($comment);
     }
 

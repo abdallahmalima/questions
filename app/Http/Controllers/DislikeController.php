@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DislikeResource;
+use App\Models\Dislike;
 use Illuminate\Http\Request;
 
 class DislikeController extends Controller
@@ -14,6 +16,7 @@ class DislikeController extends Controller
     public function index()
     {
         //
+        return DislikeResource::collection(Dislike::with(['user','comment'])->get());
     }
 
     /**
@@ -25,6 +28,7 @@ class DislikeController extends Controller
     public function store(Request $request)
     {
         //
+        return new DislikeResource($request->user()->create($request->except('user_id')));
     }
 
     /**
@@ -33,9 +37,10 @@ class DislikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Dislike $dislike)
     {
         //
+        return new DislikeResource($dislike->loadMissing(['user','comment']));
     }
 
     /**
@@ -45,9 +50,11 @@ class DislikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dislike $dislike)
     {
         //
+        $dislike->update($request->except('user_id'));
+        return new DislikeResource($dislike);
     }
 
     /**
@@ -56,8 +63,10 @@ class DislikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( Dislike $dislike)
     {
         //
+        $dislike->delete();
+        return response()->noContent();
     }
 }

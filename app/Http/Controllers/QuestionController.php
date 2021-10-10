@@ -17,7 +17,7 @@ class QuestionController extends Controller
     {
         //
 
-        return QuestionResource::collection(Question::with('replies')->get());
+        return QuestionResource::collection(Question::with(['replies','user'])->get());
     }
 
     /**
@@ -41,7 +41,7 @@ class QuestionController extends Controller
     public function show(Question $question)
     {
         //
-        return new QuestionResource($question->loadMissing('replies'));
+        return new QuestionResource($question->loadMissing(['replies','user']));
     }
 
     /**
