@@ -27,4 +27,11 @@ Route::group(['middleware'=>'auth:sanctum','prefix'=>'v1'],function(){
     });
 
     Route::apiResource('questions',App\Http\Controllers\QuestionController::class);
+    Route::apiResource('replies',App\Http\Controllers\ReplyController::class);
+    Route::apiResource('votes',App\Http\Controllers\VoteController::class);
+    Route::apiResource('comments',App\Http\Controllers\CommentController::class);
+    Route::apiResource('likes',App\Http\Controllers\LikeController::class);
+    Route::apiResource('dislikes',App\Http\Controllers\DislikeController::class);
+    Route::apiResource('questions/{id}/replies',App\Http\Controllers\QuestionReplyController::class);
+    Route::apiResource('replies/{id}/comments',App\Http\Controllers\ReplyCommentController::class);
 });

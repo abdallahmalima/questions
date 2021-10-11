@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReplyCommentResource;
+use App\Models\Reply;
 use Illuminate\Http\Request;
-use App\Http\Resources\CommentResource;
-use App\Models\Comment;
 
-class CommentController extends Controller
+class ReplyCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
-        return CommentResource::collection(Comment::with(['user','reply'])->withCount(['likes','dislikes'])->get());
+        $reply=Reply::find($id);
+        if(!$reply)   return  response()->noContent();
+        return new ReplyCommentResource($reply->loadMissing(['user','question.user','comments.user'])->loadCount(['comments']));
     }
 
     /**
@@ -28,7 +29,6 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         //
-        return new CommentResource($request->user()->comments()->create($request->all()));
     }
 
     /**
@@ -37,10 +37,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show($id)
     {
         //
-        return new CommentResource($comment->loadMissing(['user','reply','likes','dislikes']));
     }
 
     /**
@@ -50,11 +49,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, $id)
     {
         //
-        $comment->update($request->except('user_id'));
-        return new CommentResource($comment);
     }
 
     /**
@@ -63,10 +60,8 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
         //
-        $comment->delete();
-        return response()->noContent();
     }
 }

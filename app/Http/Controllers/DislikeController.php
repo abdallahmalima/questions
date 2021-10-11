@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DislikeResource;
 use App\Models\Dislike;
+use App\Models\Like;
 use Illuminate\Http\Request;
 
 class DislikeController extends Controller
@@ -28,7 +29,10 @@ class DislikeController extends Controller
     public function store(Request $request)
     {
         //
-        return new DislikeResource($request->user()->create($request->except('user_id')));
+        $like=Like::whereUserIdAndCommentId($request->user()->id,$request->comment_id)->first();
+        if($like)  $like->delete();
+
+        return new DislikeResource($request->user()->dislikes()->create($request->except('user_id')));
     }
 
     /**

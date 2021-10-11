@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use phpDocumentor\Reflection\Types\Boolean;
 
-class CommentResource extends JsonResource
+class QuestionReplyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,11 +17,9 @@ class CommentResource extends JsonResource
         return [
             'id'=>$this->id,
             'title'=>$this->title,
-            'user'=>$this->user->name,
-            'reply'=>new ReplyResource($this->whenLoaded('reply')),
-            'has_like'=>(Boolean)$this->hasLike,
-            'likes_count'=>$this->likes->count(),
-            'dislikes_count'=>$this->dislikes->count(),
+            'replies_count'=>(int)$this->replies_count,
+            'user_name'=>$this->user->name,
+            'replies'=>ReplyResource::collection($this->whenLoaded('replies')),
         ];
     }
 }

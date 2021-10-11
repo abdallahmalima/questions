@@ -15,9 +15,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
-
-        return QuestionResource::collection(Question::with(['replies','user'])->get());
+        return QuestionResource::collection(Question::with(['user'])->withCount(['replies'])->get());
     }
 
     /**
@@ -29,6 +27,7 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         //
+       
         return new QuestionResource($request->user()->questions()->create($request->all()));
     }
 

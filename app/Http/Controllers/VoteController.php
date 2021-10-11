@@ -28,7 +28,7 @@ class VoteController extends Controller
     public function store(Request $request)
     {
         //
-        return new VoteResource($request->user()->create($request->all()));
+        return new VoteResource($request->user()->votes()->create($request->all()));
     }
 
     /**

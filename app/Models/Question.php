@@ -23,10 +23,6 @@ class Question extends Model
         return $this->hasMany(Reply::class);
     }
 
-   public function setUserIdAttribute($value){
-       if($this->user_id){
-           return;
-       }
-       $this->attributes['user_id']=$value;
-   }
+  
+  
 }

@@ -23,13 +23,17 @@ class Comment extends Model
         return $this->hasMany(Like::class);
     }
 
-    public function replies(){
+    public function reply(){
 
-        return $this->hasMany(Reply::class);
+        return $this->belongsTo(Reply::class);
     }
 
     public function dislikes(){
 
         return $this->hasMany(Dislike::class);
+    }
+
+    public function hasLike(){
+        return $this->hasOne(Like::class)->whereUserId(auth()->user()->id);
     }
 }

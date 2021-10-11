@@ -17,8 +17,8 @@ class QuestionResource extends JsonResource
         return [
             'id'=>$this->id,
             'title'=>$this->title,
-            'reply'=>ReplyResource::collection($this->whenLoaded($this->replies)),
-            'user'=>new UserResource($this->whenLoaded($this->user)),
+            'replies_count'=>(int)$this->replies_count,
+            'user_name'=>$this->user->name,
         ];
     }
 }

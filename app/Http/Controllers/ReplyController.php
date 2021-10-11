@@ -16,7 +16,7 @@ class ReplyController extends Controller
     public function index()
     {
         //
-        return ReplyResource::collection(Reply::with(['question','comments','user','votes'])->get());
+        return ReplyResource::collection(Reply::with(['question','comments','user'])->withCount(['votes','comments'])->get());
     }
 
     /**

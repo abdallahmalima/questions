@@ -18,10 +18,10 @@ class ReplyResource extends JsonResource
         return [
             'id'=>$this->id,
             'title'=>$this->title,
-            'user'=>new UserResource($this->whenLoaded($this->user)),
-            'comments'=>CommentResource::collection($this->whenLoaded($this->comments)),
-            'votes'=>VoteResource::collection($this->whenLoaded($this->votes)),
-            'question'=>new QuestionResource($this->whenLoaded($this->question)),
+            'user_name'=>$this->user->name,
+            'comments_count'=>$this->comments->count(),
+            'votes_count'=>$this->votes()->count(),
+            'question'=>new QuestionResource($this->whenLoaded('question')),
         ];
     }
 }
