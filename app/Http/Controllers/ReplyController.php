@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreReplyRequest;
+use App\Http\Requests\UpdateReplyRequest;
 use App\Http\Resources\ReplyResource;
 use App\Models\Reply;
 use Illuminate\Http\Request;
@@ -25,7 +27,7 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreReplyRequest $request)
     {
         //
         return new ReplyResource($request->user()->replies()->create($request->all()));
@@ -50,7 +52,7 @@ class ReplyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reply $reply)
+    public function update(UpdateReplyRequest $request, Reply $reply)
     {
         //
         $reply->update($request->except('user_id'));

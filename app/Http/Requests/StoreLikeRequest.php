@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class VoteRequest extends FormRequest
+class StoreLikeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class VoteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class VoteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'comment_d'=>'required|interger',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'comment_d.required'=>'The comment field is required.',
         ];
     }
 }

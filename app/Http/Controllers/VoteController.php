@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVoteRequest;
 use App\Http\Resources\VoteResource;
 use App\Models\Vote;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class VoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreVoteRequest $request)
     {
         //
         return new VoteResource($request->user()->votes()->firstOrCreate($request->all()));

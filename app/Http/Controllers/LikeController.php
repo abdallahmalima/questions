@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreLikeRequest;
 use App\Http\Resources\LikeResource;
 use App\Models\Dislike;
 use App\Models\Like;
@@ -26,7 +27,7 @@ class LikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLikeRequest $request)
     {
         //
         $dislike=Dislike::whereUserIdAndCommentId($request->user()->id,$request->comment_id)->first();
