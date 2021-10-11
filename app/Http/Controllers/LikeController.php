@@ -57,8 +57,7 @@ class LikeController extends Controller
     public function update(Request $request, Like $like)
     {
         //
-        $like->update($request->except('user_id'));
-        return new LikeResource($like);
+        return response()->noContent();
     }
 
     /**

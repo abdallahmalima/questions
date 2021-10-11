@@ -16,8 +16,8 @@ class VoteResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'user'=>new UserResource($this->whenLoaded('user')),
-            'reply'=>new VoteResource($this->whenLoaded('reply')),
+            'user_name'=>$this->user->name,
+            'reply'=>$this->reply->title,
         ];
     }
 }

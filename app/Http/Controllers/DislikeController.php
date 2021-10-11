@@ -30,8 +30,7 @@ class DislikeController extends Controller
     {
         //
         $like=Like::whereUserIdAndCommentId($request->user()->id,$request->comment_id)->first();
-        if($like)  $like->delete();
-
+        if($like) $like->delete();
         return new DislikeResource($request->user()->dislikes()->create($request->except('user_id')));
     }
 
@@ -57,8 +56,7 @@ class DislikeController extends Controller
     public function update(Request $request, Dislike $dislike)
     {
         //
-        $dislike->update($request->except('user_id'));
-        return new DislikeResource($dislike);
+        return response()->noContent();
     }
 
     /**

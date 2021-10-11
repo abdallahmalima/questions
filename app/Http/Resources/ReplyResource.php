@@ -20,7 +20,7 @@ class ReplyResource extends JsonResource
             'title'=>$this->title,
             'user_name'=>$this->user->name,
             'comments_count'=>$this->comments->count(),
-            'votes_count'=>$this->votes()->count(),
+            'votes_count'=>$this->votes->count(),
             'question'=>new QuestionResource($this->whenLoaded('question')),
         ];
     }

@@ -28,7 +28,7 @@ class VoteController extends Controller
     public function store(Request $request)
     {
         //
-        return new VoteResource($request->user()->votes()->create($request->all()));
+        return new VoteResource($request->user()->votes()->firstOrCreate($request->all()));
     }
 
     /**
@@ -53,8 +53,7 @@ class VoteController extends Controller
     public function update(Request $request, Vote $vote)
     {
         //
-        $vote->update($request->except('user_id'));
-        return new VoteResource($vote);
+        return response()->noContent();
     }
 
     /**

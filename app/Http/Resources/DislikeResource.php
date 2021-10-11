@@ -16,8 +16,8 @@ class DislikeResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'user'=>new UserResource($this->whenLoaded('user')),
-            'comment'=>new CommentResource($this->whenLoaded('comment'))
+            'user_name'=>$this->user->name,
+            'comment'=>$this->comment->title
         ];
     }
 }

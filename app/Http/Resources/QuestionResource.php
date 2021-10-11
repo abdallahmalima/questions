@@ -17,7 +17,7 @@ class QuestionResource extends JsonResource
         return [
             'id'=>$this->id,
             'title'=>$this->title,
-            'replies_count'=>(int)$this->replies_count,
+            'replies_count'=>$this->replies->count(),
             'user_name'=>$this->user->name,
         ];
     }

@@ -29,6 +29,7 @@ class ReplyCommentController extends Controller
     public function store(Request $request)
     {
         //
+        return response()->noContent();
     }
 
     /**
@@ -40,6 +41,7 @@ class ReplyCommentController extends Controller
     public function show($id)
     {
         //
+        return response()->noContent();
     }
 
     /**
@@ -52,6 +54,7 @@ class ReplyCommentController extends Controller
     public function update(Request $request, $id)
     {
         //
+        return response()->noContent();
     }
 
     /**
@@ -63,5 +66,6 @@ class ReplyCommentController extends Controller
     public function destroy($id)
     {
         //
+        return response()->noContent();
     }
 }
