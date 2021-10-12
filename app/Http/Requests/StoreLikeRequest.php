@@ -24,7 +24,7 @@ class StoreLikeRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment_d'=>'required|interger',
+            'comment_id'=>'required|integer',
         ];
     }
 

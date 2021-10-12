@@ -24,7 +24,7 @@ class StoreVoteRequest extends FormRequest
     public function rules()
     {
         return [
-            'reply_d'=>'required|interger',
+            'reply_id'=>'required|integer',
         ];
     }
 

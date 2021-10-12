@@ -25,7 +25,7 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             'title'=>'required|string|max:255',
-            'reply_d'=>'required|interger',
+            'reply_id'=>'required|integer',
         ];
     }
 

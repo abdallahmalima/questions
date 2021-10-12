@@ -8,6 +8,7 @@ use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
+
 class QuestionController extends Controller
 {
     /**
@@ -69,6 +70,6 @@ class QuestionController extends Controller
     {
         //
         $question->delete();
-        return response()->onContent();
+        return  response()->noContent();
     }
 }

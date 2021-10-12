@@ -25,7 +25,7 @@ class StoreReplyRequest extends FormRequest
     {
         return [
             'title'=>'required|string|max:255',
-            'question_d'=>'required|interger',
+            'question_id'=>'required|integer',
         ];
     }
 
