@@ -33,5 +33,6 @@ Route::group(['middleware'=>'auth:sanctum','prefix'=>'v1'],function(){
     Route::apiResource('likes',App\Http\Controllers\LikeController::class);
     Route::apiResource('dislikes',App\Http\Controllers\DislikeController::class);
     Route::apiResource('questions/{question}/replies',App\Http\Controllers\QuestionReplyController::class);
+    Route::get('questions/{question}/images',App\Http\Controllers\QuestionImageController::class);
     Route::apiResource('replies/{reply}/comments',App\Http\Controllers\ReplyCommentController::class);
 });
