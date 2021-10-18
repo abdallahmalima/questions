@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreReplyCommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Http\Resources\ReplyCommentResource;
 use App\Models\Reply;
 use Illuminate\Http\Request;
@@ -26,10 +28,12 @@ class ReplyCommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreReplyCommentRequest $request,Reply $reply)
     {
         //
-        return response()->noContent();
+        $inputs=$request->all();
+        $inputs['reply_id']=$reply->id;
+        return new CommentResource($request->user()->comments()->create($inputs));
     }
 
     /**

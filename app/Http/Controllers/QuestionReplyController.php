@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuestionReplyRequest;
 use App\Http\Resources\QuestionReplyResource;
+use App\Http\Resources\ReplyResource;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
@@ -13,11 +15,8 @@ class QuestionReplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(Question $question)
     {
-        //
-        $question=Question::find($id);
-        if(!$question)   return  response()->noContent();
         return new QuestionReplyResource($question->loadMissing(['user','replies.user','replies.comments'])->loadCount(['replies']));
     }
 
@@ -27,10 +26,16 @@ class QuestionReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreQuestionReplyRequest $request,Question $question)
     {
         //
-        return response()->noContent();
+       $inputs=$request->all();
+       $inputs['question_id']=$question->id;
+       $reply=$request->user()->replies()->create($inputs);
+       if($request->hasFile('image')){
+        $reply->image()->create(['url'=>$request->file('image')->store('images','public')]); 
+       }
+        return new ReplyResource($reply);
     }
 
     /**

@@ -27,10 +27,10 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreReplyRequest $request)
+    public function store(Request $request)
     {
         //
-        return new ReplyResource($request->user()->replies()->create($request->all()));
+        return response()->noContent();
     }
 
     /**

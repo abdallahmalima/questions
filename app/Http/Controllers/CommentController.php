@@ -27,10 +27,10 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request)
+    public function store(Request $request)
     {
         //
-        return new CommentResource($request->user()->comments()->create($request->all()));
+        return response()->onContent();
     }
 
     /**

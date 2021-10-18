@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCommentRequest extends FormRequest
+class StoreQuestionReplyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,7 @@ class StoreCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|string|max:255',
-            'reply_id'=>'required|integer',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'reply_d.required'=>'The reply field is required.',
+            'title'=>'required|string|max:255'
         ];
     }
 }

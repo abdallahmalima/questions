@@ -19,6 +19,7 @@ class QuestionResource extends JsonResource
             'title'=>$this->title,
             'replies_count'=>$this->replies->count(),
             'user_name'=>$this->user->name,
+            'created_at'=>$this->created_at->diffForHumans(),
         ];
     }
 }

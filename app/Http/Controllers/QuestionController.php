@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Controllers\Repositories\QuestionRepository;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Http\Resources\QuestionResource;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +21,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
+       
         return QuestionResource::collection(Question::with(['user'])->withCount(['replies'])->get());
     }
 
@@ -30,8 +34,12 @@ class QuestionController extends Controller
     public function store(StoreQuestionRequest $request)
     {
         //
+        $question=$request->user()->questions()->create($request->except('image'));
+        if($request->hasFile('image')){
+            $question->image()->create(['url'=>$request->file('image')->store('images','public')]);
+        }
        
-        return new QuestionResource($request->user()->questions()->create($request->all()));
+        return new QuestionResource($question);
     }
 
     /**
