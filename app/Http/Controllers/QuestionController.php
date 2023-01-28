@@ -34,6 +34,7 @@ class QuestionController extends Controller
     public function store(StoreQuestionRequest $request)
     {
         //
+    
         $question=$request->user()->questions()->create($request->except('image'));
         if($request->hasFile('image')){
             $question->image()->create(['url'=>$request->file('image')->store('images','public')]);
